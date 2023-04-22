@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   {
     path: 'user',
-    loadChildren: () => import('./users/user.module').then((m) => m.UserModule),
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'product',
