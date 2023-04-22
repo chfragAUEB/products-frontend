@@ -10,8 +10,20 @@
           }}</a></strong
         >
       </span>
-      <span> Coding Factory</span>
-      <ul class="navbar-nav">
+      <span *ngIf="!(isLoggedIn$ | async); else fullname" (click)="login()">
+        Coding Factory</span
+      >
+      <!-- Αυτό το κομμάτι όταν πω για το loggedInUserFullNameSubject -->
+      <ng-template #fullname>
+        <div>
+          <span>{{ loggedInUserFullName$ | async }}</span>
+          <button class="ms-2 btn btn-danger btn-sm" (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </ng-template>
+      <!-- ---------------------------------------------------------- -->
+      <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
         <app-dropdown
           [dropdownLabel]="'Users'"
           [items]="usersMenu"
@@ -21,9 +33,13 @@
           [items]="productsMenu"
         ></app-dropdown>
       </ul>
+      <ng-template #loggedOut>
+        <a class="btn btn-primary btn-sm" routerLink="/auth/login">Login</a>
+      </ng-template>
     </nav>
   </div>
   <div class="row mt-2">
+    <div *ngIf="isLoggedIn$ | async">Your are logged in!</div>
     <router-outlet></router-outlet>
   </div>
 </div>
