@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MenuItem } from '../app.interfaces';
+import { MenuItem } from '../ui.interfaces';
 
 @Component({
-  selector: 'app-dropdown',
+  selector: 'lib-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css'],
 })

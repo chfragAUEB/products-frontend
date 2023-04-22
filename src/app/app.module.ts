@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
+import { UiModule } from 'ui';
+
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+// import { DropdownComponent } from './dropdown/dropdown.component';
 import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
@@ -32,9 +34,14 @@ const routes: Routes = [
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    DropdownComponent,
+    // DropdownComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), HttpClientModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    UiModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

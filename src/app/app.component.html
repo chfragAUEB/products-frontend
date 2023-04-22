@@ -24,14 +24,14 @@
       </ng-template>
       <!-- ---------------------------------------------------------- -->
       <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
-        <app-dropdown
+        <lib-dropdown
           [dropdownLabel]="'Users'"
           [items]="usersMenu"
-        ></app-dropdown>
-        <app-dropdown
+        ></lib-dropdown>
+        <lib-dropdown
           [dropdownLabel]="'Products'"
           [items]="productsMenu"
-        ></app-dropdown>
+        ></lib-dropdown>
       </ul>
       <ng-template #loggedOut>
         <a class="btn btn-primary btn-sm" routerLink="/auth/login">Login</a>
