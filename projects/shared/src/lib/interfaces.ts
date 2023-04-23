@@ -4,7 +4,7 @@ export interface MenuItem {
 }
 
 export interface Alert {
-  type: 'primary' | 'info' | 'success' | 'danger' | 'warning';
+  type?: 'primary' | 'info' | 'success' | 'danger' | 'warning';
   heading?: string;
   text: string;
   spinner?: boolean;

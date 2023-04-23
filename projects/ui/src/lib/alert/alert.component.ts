@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-alert',
@@ -10,4 +10,9 @@ export class AlertComponent {
   @Input() heading: string | undefined;
   @Input() text = 'This is the alert text';
   @Input() spinner: boolean | undefined;
+  @Output() dismiss = new EventEmitter();
+
+  onDismiss() {
+    this.dismiss.emit();
+  }
 }

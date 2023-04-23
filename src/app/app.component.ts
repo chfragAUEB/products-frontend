@@ -17,6 +17,8 @@ export class AppComponent {
 
   isLoading$ = this.service.isLoading$;
 
+  alerts = this.service.alerts;
+
   constructor(private service: AuthService) {}
 
   fakeLogin() {
@@ -25,5 +27,9 @@ export class AppComponent {
 
   logout() {
     this.service.logout();
+  }
+
+  onAlertDismiss(i: number) {
+    this.alerts.splice(i, 1);
   }
 }

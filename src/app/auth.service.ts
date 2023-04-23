@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Alert } from 'shared';
 
 interface User {
   data: {
@@ -29,15 +30,36 @@ export class AuthService {
     this.isLoadingSubject.next(isLoading);
   }
 
+  alerts: Alert[] = [];
+
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
     this.http.get<User>(`${USER_API}/findone/${username}`).subscribe((user) => {
-      this.loggedInSubject.next(user.data.password === password);
-      this.loggedInUserFullNameSubject.next(
-        `${user.data.name} ${user.data.surname}`
-      );
+      console.log(user);
+      // Πριν το alert service
+      // this.loggedInSubject.next(user.data.password === password);
+      // this.loggedInUserFullNameSubject.next(
+      //   `${user.data.name} ${user.data.surname}`
+      // );
+      if (user.data && user.data.password === password) {
+        this.loggedInSubject.next(user.data.password === password);
+        this.loggedInUserFullNameSubject.next(
+          `${user.data.name} ${user.data.surname}`
+        );
+      } else {
+        this.alerts.push({
+          type: 'danger',
+          heading: 'Authentication Error',
+          text: 'Wrong username or password',
+        });
+        console.log(this.alerts);
+      }
     });
+  }
+
+  newAlert(alert: Alert) {
+    this.alerts.push(alert);
   }
 
   logout() {
