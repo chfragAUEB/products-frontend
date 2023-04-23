@@ -9,7 +9,8 @@
     "test": "ng test",
     "clean": "rimraf dist",
     "watch-lib:ui": "ng build ui --watch",
-    "serve": "wait-on dist/ui/public-api.d.ts && ng serve",
+    "watch-lib:shared": "ng build shared --watch",
+    "serve": "wait-on dist/ui/public-api.d.ts && wait-on dist/shared/public-api.d.ts && ng serve",
     "watch-all": "npm run clean && run-p watch-lib:* serve"
   },
   "private": true,

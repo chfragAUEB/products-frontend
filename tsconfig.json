@@ -20,6 +20,9 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "paths": {
+      "shared": [
+        "dist/shared"
+      ],
       "ui": [
         "dist/ui"
       ]

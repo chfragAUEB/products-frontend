@@ -10,7 +10,7 @@
           }}</a></strong
         >
       </span>
-      <span *ngIf="!(isLoggedIn$ | async); else fullname" (click)="login()">
+      <span *ngIf="!(isLoggedIn$ | async); else fullname" (click)="fakeLogin()">
         Coding Factory</span
       >
       <!-- Αυτό το κομμάτι όταν πω για το loggedInUserFullNameSubject -->
@@ -39,6 +39,12 @@
     </nav>
   </div>
   <div class="row mt-2">
+    <lib-alert
+      [type]="'info'"
+      [text]="'Communicating with backend ... '"
+      [spinner]="true"
+      *ngIf="isLoading$ | async"
+    ></lib-alert>
     <div *ngIf="isLoggedIn$ | async">Your are logged in!</div>
     <router-outlet></router-outlet>
   </div>

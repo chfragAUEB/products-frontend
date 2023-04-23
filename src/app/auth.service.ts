@@ -18,11 +18,16 @@ const USER_API = 'https://codingfactory.ddns.net/api/user';
 })
 export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
-  public isLoggedIn$ = this.loggedInSubject.asObservable();
+  isLoggedIn$ = this.loggedInSubject.asObservable();
 
   private loggedInUserFullNameSubject = new BehaviorSubject<string>('');
-  public loggedInUserFullName$ =
-    this.loggedInUserFullNameSubject.asObservable();
+  loggedInUserFullName$ = this.loggedInUserFullNameSubject.asObservable();
+
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  isLoading$ = this.isLoadingSubject.asObservable();
+  setLoadingState(isLoading: boolean) {
+    this.isLoadingSubject.next(isLoading);
+  }
 
   constructor(private http: HttpClient) {}
 
