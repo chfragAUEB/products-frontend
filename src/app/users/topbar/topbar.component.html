@@ -1,0 +1,36 @@
+<!-- <p>restricted topbar works!</p> -->
+<nav
+  class="p-2 navbar navbar-expand navbar-light bg-light justify-content-between"
+>
+  <span class="navbar-brand">
+    <strong
+      ><a
+        href="#"
+        routerLink="{{ (isLoggedIn$ | async) ? '/user' : '' }}"
+        class="text-decoration-none text-black"
+        >{{ appName }}</a
+      ></strong
+    >
+  </span>
+  <span *ngIf="!(isLoggedIn$ | async); else fullname"> Coding Factory</span>
+
+  <ng-template #fullname>
+    <div>
+      <span>{{ loggedInUserFullName$ | async }}</span>
+      <button class="ms-2 btn btn-danger btn-sm" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </ng-template>
+
+  <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
+    <lib-dropdown [dropdownLabel]="'Users'" [items]="usersMenu"></lib-dropdown>
+    <lib-dropdown
+      [dropdownLabel]="'Products'"
+      [items]="productsMenu"
+    ></lib-dropdown>
+  </ul>
+  <ng-template #loggedOut>
+    <a class="btn btn-primary btn-sm" routerLink="/login">Login</a>
+  </ng-template>
+</nav>

@@ -5,12 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { tap } from 'rxjs';
 
+import { UiModule } from 'ui';
+
 import { UserService } from './user.service';
 import { AuthService } from '../auth.service';
 
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserInsertComponent } from './user-insert/user-insert.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { TopbarComponent } from './topbar/topbar.component';
 
 const usersGuard = () => {
   const router = inject(Router);
@@ -30,15 +33,22 @@ const routes: Routes = [
     canActivate: [usersGuard],
   },
   { path: '', component: WelcomeComponent, canActivate: [usersGuard] },
+  { path: '', component: TopbarComponent, outlet: 'topbar' },
 ];
 
 @NgModule({
-  declarations: [UsersListComponent, UserInsertComponent, WelcomeComponent],
+  declarations: [
+    UsersListComponent,
+    UserInsertComponent,
+    WelcomeComponent,
+    TopbarComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     HttpClientModule,
     ReactiveFormsModule,
+    UiModule,
   ],
   providers: [UserService],
 })

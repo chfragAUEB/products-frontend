@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <div class="row">
+  <!-- <div class="row">
     <nav
       class="p-2 navbar navbar-expand navbar-light bg-light justify-content-between"
     >
@@ -16,7 +16,7 @@
       <span *ngIf="!(isLoggedIn$ | async); else fullname" (click)="fakeLogin()">
         Coding Factory</span
       >
-      <!-- Αυτό το κομμάτι όταν πω για το loggedInUserFullNameSubject -->
+
       <ng-template #fullname>
         <div>
           <span>{{ loggedInUserFullName$ | async }}</span>
@@ -25,7 +25,7 @@
           </button>
         </div>
       </ng-template>
-      <!-- ---------------------------------------------------------- -->
+
       <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
         <lib-dropdown
           [dropdownLabel]="'Users'"
@@ -40,7 +40,9 @@
         <a class="btn btn-primary btn-sm" routerLink="/login">Login</a>
       </ng-template>
     </nav>
-  </div>
+  </div> -->
+  <div class="row"><router-outlet name="topbar"></router-outlet></div>
+
   <div class="row mt-2">
     <lib-alert
       [type]="'info'"
