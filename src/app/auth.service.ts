@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Alert } from 'shared';
+import { Router } from '@angular/router';
 
 interface User {
   data: {
@@ -20,6 +21,9 @@ const USER_API = 'https://codingfactory.ddns.net/api/user';
 export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.loggedInSubject.asObservable();
+  isLoggedIn() {
+    return this.loggedInSubject.value;
+  }
 
   private loggedInUserFullNameSubject = new BehaviorSubject<string>('');
   loggedInUserFullName$ = this.loggedInUserFullNameSubject.asObservable();
@@ -32,7 +36,7 @@ export class AuthService {
 
   alerts: Alert[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
     this.http.get<User>(`${USER_API}/findone/${username}`).subscribe((user) => {
@@ -47,6 +51,7 @@ export class AuthService {
         this.loggedInUserFullNameSubject.next(
           `${user.data.name} ${user.data.surname}`
         );
+        this.router.navigate(['/user']);
       } else {
         this.alerts.push({
           type: 'danger',
@@ -65,6 +70,7 @@ export class AuthService {
   logout() {
     this.loggedInSubject.next(false);
     this.loggedInUserFullNameSubject.next('');
+    this.router.navigate(['']);
   }
 
   toggleLogin() {

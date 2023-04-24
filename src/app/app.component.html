@@ -5,9 +5,12 @@
     >
       <span class="navbar-brand">
         <strong
-          ><a href="#" routerLink="" class="text-decoration-none text-black">{{
-            title
-          }}</a></strong
+          ><a
+            href="#"
+            routerLink="{{ (isLoggedIn$ | async) ? '/user' : '' }}"
+            class="text-decoration-none text-black"
+            >{{ title }}</a
+          ></strong
         >
       </span>
       <span *ngIf="!(isLoggedIn$ | async); else fullname" (click)="fakeLogin()">
