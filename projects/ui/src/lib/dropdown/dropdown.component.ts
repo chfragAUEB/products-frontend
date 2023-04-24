@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MenuItem } from 'shared';
 
 @Component({
-  selector: 'app-dropdown',
+  selector: 'lib-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css'],
 })
