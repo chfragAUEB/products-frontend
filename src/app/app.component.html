@@ -10,8 +10,16 @@
           }}</a></strong
         >
       </span>
-      <span> Coding Factory</span>
-      <ul class="navbar-nav">
+
+      <span *ngIf="!(isLoggedIn$ | async); else fullname"> Coding Factory</span>
+      <ng-template #fullname>
+        <span> {{ loggedInUserFullname$ | async }}</span>
+        <button class="ms-2 btn btn-danger btn-sm" (click)="logout()">
+          Logout
+        </button>
+      </ng-template>
+
+      <ul *ngIf="isLoggedIn$ | async; else loggedOut" class="navbar-nav">
         <lib-dropdown
           [dropdownLabel]="'Users'"
           [items]="usersMenu"
@@ -21,6 +29,10 @@
           [items]="productsMenu"
         ></lib-dropdown>
       </ul>
+
+      <ng-template #loggedOut>
+        <a class="btn btn-primary btn-sm" routerLink="/login">Login</a>
+      </ng-template>
     </nav>
   </div>
   <div class="row mt-2">
