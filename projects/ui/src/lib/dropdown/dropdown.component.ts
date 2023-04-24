@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MenuItem } from '../ui.interfaces';
+import { MenuItem } from 'shared';
 
 @Component({
   selector: 'lib-dropdown',
