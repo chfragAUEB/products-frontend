@@ -7,3 +7,4 @@ export * from './lib/shared.component';
 export * from './lib/shared.module';
 export * from './lib/interfaces';
 export * from './lib/menus';
+export * from './lib/user.interfaces';
