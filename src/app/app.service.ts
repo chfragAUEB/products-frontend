@@ -27,6 +27,7 @@ export class AppService {
   ) {}
 
   login(username: string, password: string) {
+    this.setIsLoading(true);
     this.http
       .get<UserAPIUserOne>(`${USER_API}/findone/${username}`)
       .subscribe((user) => {
@@ -48,12 +49,14 @@ export class AppService {
             text: 'Wrong user name or password',
           });
         }
+        this.setIsLoading(false);
       });
   }
 
   logout() {
     this.loggedInSubject.next(false);
     this.loggedInUserFullnameSubject.next('');
+    this.router.navigate(['']);
   }
 
   setIsLoading(isLoading: boolean) {
