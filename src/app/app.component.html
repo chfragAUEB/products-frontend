@@ -37,6 +37,13 @@
   </div>
   <div class="row mt-2">
     <lib-alert
+      *ngIf="isLoading$ | async"
+      [type]="'info'"
+      [text]="'Communicating with backend ...'"
+      [spinner]="true"
+    ></lib-alert>
+
+    <lib-alert
       *ngFor="let alert of alerts; index as i"
       [type]="alert.type ?? 'info'"
       [heading]="alert.heading"
