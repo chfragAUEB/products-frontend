@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User, UserAPIUserOne } from 'shared';
 import { BehaviorSubject } from 'rxjs';
 import { UiService } from 'ui';
+import { Router } from '@angular/router';
 
 const USER_API = 'https://codingfactory.ddns.net/api/user';
 
@@ -16,17 +17,27 @@ export class AppService {
   private loggedInUserFullnameSubject = new BehaviorSubject<string>('');
   loggedInUserFullname$ = this.loggedInUserFullnameSubject.asObservable();
 
-  constructor(private http: HttpClient, private alertService: UiService) {}
+  constructor(
+    private http: HttpClient,
+    private alertService: UiService,
+    private router: Router
+  ) {}
 
   login(username: string, password: string) {
     this.http
       .get<UserAPIUserOne>(`${USER_API}/findone/${username}`)
       .subscribe((user) => {
-        if (user.data) {
+        if (user.data && user.data.password === password) {
           this.loggedInSubject.next(user.data.password === password);
           this.loggedInUserFullnameSubject.next(
             `${user.data.name} ${user.data.surname}`
           );
+          this.alertService.newAlert({
+            type: 'success',
+            heading: `Welcome ${this.loggedInUserFullnameSubject.value}`,
+            text: 'Nice to see you again!',
+          });
+          this.router.navigate(['/user']);
         } else {
           this.alertService.newAlert({
             type: 'danger',
