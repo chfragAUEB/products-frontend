@@ -6,4 +6,7 @@ import { AppService } from 'src/app/app.service';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css'],
 })
-export class WelcomeComponent {}
+export class WelcomeComponent {
+  fullname$ = this.service.loggedInUserFullname$;
+  constructor(private service: AppService) {}
+}

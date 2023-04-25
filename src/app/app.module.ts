@@ -8,7 +8,6 @@ import { UiModule } from 'ui';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
 
 const routes: Routes = [
   {
@@ -29,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, DropdownComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
